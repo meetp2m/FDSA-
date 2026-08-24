@@ -8,11 +8,9 @@ int main()
 
     cout<<"Enter number of buckets: ";
     cin>>n;
-
     cout<<"Enter colour codes:"<<endl;
     for(i=0;i<n;i++)
         cin>>a[i];
-
     for(i=0;i<n;i++)
     {
         if(a[i]==0)
@@ -22,7 +20,6 @@ int main()
         else
             count2++;
     }
-
     i=0;
     while(count0>0)
     {
@@ -42,11 +39,9 @@ int main()
         i++;
         count2--;
     }
-
     cout<<"Sorted colour codes: ";
     for(i=0;i<n;i++)
         cout<<a[i]<<" ";
-
     cout<<endl;
 
     return 0;
