@@ -2,40 +2,47 @@
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
-
-    int q[100];
-    int front = 0, rear = -1;
+    int n, q[100], front=0, rear=-1, count=0;
     int choice, value;
 
-    while (cin >> choice) {
-        if (choice == 1) {
-            cin >> value;
+    cout<<"Enter queue size: ";
+    cin>>n;
 
-            if (rear == n - 1) {
-                cout << "Queue Overflow" << endl;
-            } else {
-                rear++;
-                q[rear] = value;
-                cout << "Front: " << q[front] << endl;
+    while(true) {
+        cout<<"\n1.Join  2.Serve  3.Exit\n";
+        cout<<"Enter choice: ";
+        cin>>choice;
+
+        if(choice==1) {
+            cout<<"Enter token: ";
+            cin>>value;
+
+            if(count==n)
+                cout<<"Queue Overflow\n";
+            else {
+                rear=(rear+1)%n;
+                q[rear]=value;
+                count++;
+                cout<<"Front: "<<q[front]<<endl;
             }
         }
-        else if (choice == 2) {
-            if (front > rear) {
-                cout << "Queue Underflow" << endl;
-            } else {
-                front++;
-                if (front <= rear)
-                    cout << "Front: " << q[front] << endl;
+        else if(choice==2) {
+            if(count==0)
+                cout<<"Queue Underflow\n";
+            else {
+                front=(front+1)%n;
+                count--;
+
+                if(count==0)
+                    cout<<"Queue Empty\n";
                 else
-                    cout << "Queue Empty" << endl;
+                    cout<<"Front: "<<q[front]<<endl;
             }
         }
-        else if (choice == 3) {
+        else if(choice==3)
             break;
-        }
+        else
+            cout<<"Invalid choice\n";
     }
-
     return 0;
 }
