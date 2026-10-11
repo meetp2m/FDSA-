@@ -1,53 +1,64 @@
-#include <iostream>
-#include <stack>
+
+#include<iostream>
+#include<stack>
+#include<string>
 using namespace std;
 
-int priority(char c) {
-    if (c == '+' || c == '-')
+int priority(char c)
+{
+    if(c=='+' || c=='-')
         return 1;
-    if (c == '*' || c == '/')
+    if(c=='*' || c=='/')
         return 2;
     return 0;
 }
 
-int main() {
-    string s;
-    cout << "Enter infix expression: ";
-    cin >> s;
-
+int main()
+{
+    string s, ans="";
     stack<char> st;
-    string ans = "";
 
-    for (char c : s) {
-        if (isdigit(c))
-            ans += c;
+    cout<<"Enter infix expression: ";
+    cin>>s;
 
-        else if (c == '(')
+    for(char c:s)
+    {
+        if(c>='0' && c<='9')
+            ans+=c;
+
+        else if(c=='(')
             st.push(c);
 
-        else if (c == ')') {
-            while (st.top() != '(') {
-                ans += st.top();
+        else if(c==')')
+        {
+            while(!st.empty() && st.top()!='(')
+            {
+                ans+=st.top();
                 st.pop();
             }
-            st.pop();
+            if(!st.empty())
+                st.pop();
         }
 
-        else {
-            while (!st.empty() && priority(st.top()) >= priority(c)) {
-                ans += st.top();
+        else
+        {
+            while(!st.empty() && st.top()!='(' &&
+                  priority(st.top())>=priority(c))
+            {
+                ans+=st.top();
                 st.pop();
             }
             st.push(c);
         }
     }
 
-    while (!st.empty()) {
-        ans += st.top();
+    while(!st.empty())
+    {
+        ans+=st.top();
         st.pop();
     }
 
-    cout << "Postfix expression: " << ans;
+    cout<<"Postfix expression: "<<ans;
 
     return 0;
 }
